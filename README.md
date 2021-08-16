@@ -50,7 +50,7 @@ You should use the following tools to accomplish this task:
 ## Where to start?
 
 - You can use the [sample/](sample/) project,
-- You can the `create-react-app`,
+- You can use the `create-react-app`,
 - Or any boilerplate you have
 
 --
