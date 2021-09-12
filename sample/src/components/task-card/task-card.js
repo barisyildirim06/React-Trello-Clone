@@ -17,15 +17,10 @@ export default function TaskCard({ task, color, onTaskCardClick }) {
     }, [task, onTaskCardClick]);
 
     let statusColor = "rgb(0,0,0)";
-    let statusText = "";
     let title = "";
 
     if (task) {
         title = `${task.title} - ${task.id}`;
-
-        if (task.status) {
-            statusText = task?.status?.text || "";
-        }
     }
 
     if (color) {
