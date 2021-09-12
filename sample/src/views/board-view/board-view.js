@@ -4,8 +4,9 @@ import Board from "react-trello";
 import TaskCard from 'components/task-card';
 
 import { Utils } from 'utils';
+import Button from 'components/button/button';
 
-export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick }) {
+export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick }) {
     const handleCardClick = useCallback(e => {
         const task = e.target.value;
         if (onTaskCardClick) {
@@ -64,6 +65,19 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
         const { task, color, onTaskCardClick } = props;
         return <TaskCard task={task} color={color} onTaskCardClick={onTaskCardClick}/>
     };
+    
+    const cardAddButton = ({ laneId }) => {
+        const handleAddTaskCardClick = () => {
+            if (onAddTaskClick) {
+                onAddTaskClick({
+                    target: {
+                        laneId
+                    }
+                })
+            }
+        }
+        return <Button type='save' onClick={handleAddTaskCardClick}>Add New Card</Button>
+    }
 
     const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
         const lanesByID = Utils.toMap(lanes, "id");
@@ -84,7 +98,8 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
     }, [lanes, onTaskSave, tasks]);
 
     const components = {
-        Card: RenderCard
+        Card: RenderCard,
+        AddCardLink: cardAddButton
     }
 
     return (

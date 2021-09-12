@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 
 /* Components */
 import Dialog from 'components/dialog';
@@ -7,7 +7,7 @@ import Button from 'components/button';
 import './task-edit-dialog.scss'
 
 export default function TaskEditDialog({ visible, onClose, onSave, task }) {
-    const [inputValues, setInputValues] = useState(task)
+    const [inputValues, setInputValues] = useState(task? task : {})
 
     const handleTaskEditSave = useCallback((e) => {
         if (onSave) {
@@ -27,18 +27,21 @@ export default function TaskEditDialog({ visible, onClose, onSave, task }) {
             ...inputValues,
             title: e.target.value
         }
-        console.log(_inputValues)
         setInputValues(_inputValues)
     }, [inputValues]);
 
+    useEffect(() => {
+        setInputValues(task)
+    }, [task])
+
     return (
         <Dialog visible={visible} onClose={onClose} width={400} style={{ backgroundColor: 'white' }}>
-            <Dialog.Header>{task.title}</Dialog.Header>
+            <Dialog.Header>{task?.id ? task.title : 'Create New Task'}</Dialog.Header>
             <Dialog.Body>
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
-                        <input type='text' value={inputValues.title} onChange={handleChange} />
+                        <input type='text' value={inputValues?.title} onChange={handleChange} />
                     </div>
                 </div>
             </Dialog.Body>
