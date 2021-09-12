@@ -4,12 +4,12 @@ import React, { useCallback, useState, useEffect } from 'react'
 import Dialog from 'components/dialog';
 import Button from 'components/button';
 
-import './task-edit-dialog.scss'
+import './status-edit-dialog.scss'
 
-export default function TaskEditDialog({ visible, onClose, onSave, task }) {
-    const [inputValues, setInputValues] = useState(task? task : {})
+export default function StatusEditDialog({ visible, onClose, onSave, status }) {
+    const [inputValues, setInputValues] = useState(status? status : {})
 
-    const handleTaskEditSave = useCallback((e) => {
+    const handleStatusEditSave = useCallback((e) => {
         if (onSave) {
             onSave({
                 target: {
@@ -25,29 +25,29 @@ export default function TaskEditDialog({ visible, onClose, onSave, task }) {
     const handleChange = useCallback((e) => {
         let _inputValues = {
             ...inputValues,
-            title: e.target.value
+            text: e.target.value
         }
         setInputValues(_inputValues)
     }, [inputValues]);
 
     useEffect(() => {
-        setInputValues(task)
-    }, [task])
+        setInputValues(status)
+    }, [status])
 
     return (
         <Dialog visible={visible} onClose={onClose} width={400} style={{ backgroundColor: 'white' }}>
-            <Dialog.Header>{task?.id ? task.title : 'Create New Task'}</Dialog.Header>
+            <Dialog.Header>{status?.id ? status.title : 'Create New Status'}</Dialog.Header>
             <Dialog.Body>
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
-                        <input type='text' style={{ width: '100%' }} value={inputValues?.title} onChange={handleChange} />
+                        <input type='text' className='input' style={{ width: '100%' }} value={inputValues?.title} onChange={handleChange} />
                     </div>
                 </div>
             </Dialog.Body>
             <Dialog.Footer>
                 <div style={{ flex: '1 1 0px' }}/>
-                <Button type="save" onClick={handleTaskEditSave}>save</Button>
+                <Button type="save" onClick={handleStatusEditSave}>save</Button>
             </Dialog.Footer>
         </Dialog>
     )
