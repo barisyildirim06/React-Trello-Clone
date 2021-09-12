@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import initialData from './initialData.js';
+import initialData from './initial-data.js';
 import './App.scss';
 
 function App() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { tasksData, statusesData } from 'initialData.js';
+import { tasksData, statusesData } from 'initial-data.js';
 import './home-page.scss';
 import BoardView from 'views/board-view';
 
