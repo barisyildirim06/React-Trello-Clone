@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './task-card.scss';
 
 /* Components */
 import Image from 'components/image';
 // import Spacer from 'components/spacer';
 
-export default function TaskCard({ task, color }) {
+export default function TaskCard({ task, color, onTaskCardClick }) {
+    const handleCardClick = useCallback((e) => {
+        if (onTaskCardClick) {
+            onTaskCardClick({
+                target: {
+                    value: task
+                }
+            })
+        }
+    }, [task, onTaskCardClick]);
+
     let statusColor = "rgb(0,0,0)";
     let statusText = "";
     let title = "";
@@ -23,7 +33,7 @@ export default function TaskCard({ task, color }) {
     }
 
     return (
-        <div className="task-card" >
+        <div className="task-card"  onClick={handleCardClick}>
             <div className="task-card-icon" style={{ borderColor: statusColor, padding: "3px"}}>
                 <Image src={"/static/img/checkmark.png"} />
             </div>
