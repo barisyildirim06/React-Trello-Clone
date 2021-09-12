@@ -39,7 +39,7 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
         return {
             id: status.id.toString(),
             title: status.text,
-            style: { background: 'purple', maxWidth: "100%", flex: "0 0 auto" },
+            style: { backgroundColor: 'rgba(233,233,233,255)', maxWidth: "100%", flex: "0 0 auto" },
             titleStyle,
             cards: [],
             status,
