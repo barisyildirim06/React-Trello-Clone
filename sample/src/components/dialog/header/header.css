@@ -1,0 +1,24 @@
+.dialog-header {
+    background-color: #3db6e8;
+    padding: 5px 0px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: move;
+}
+
+.dialog-header > .row {
+    margin: 0px;
+    padding: 0px;
+}
+
+.dialog-header-title {
+    line-height: 32px;
+    margin: 0px;
+    overflow: hidden;
+    padding: 0px 20px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,14 @@
+.dialog-body {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    padding: 10px;
+}
+
+@media (max-width: 992px) {
+    .dialog-body {
+        margin: 0px;
+    }
+}

@@ -1,0 +1,13 @@
+.dialog-footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e6e6e6;
+    display: flex;
+    padding: 0px 10px;
+}
+
+@media (max-width: 992px) {
+    .dialog-footer {
+        margin: 0px;
+        flex-direction: column;
+    }
+}
