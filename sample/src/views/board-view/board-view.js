@@ -5,7 +5,14 @@ import TaskCard from 'components/task-card';
 
 import { Utils } from 'utils';
 
-export default function BoardView({ statuses, tasks, onTaskSave }) {
+export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick }) {
+    const handleCardClick = useCallback(e => {
+        const task = e.target.value;
+        if (onTaskCardClick) {
+            onTaskCardClick({ target: { value: task } });
+        }
+    }, [onTaskCardClick]);
+
     let lanes = statuses.map(status => {
 
         const titleStyle = {
@@ -46,15 +53,16 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
                 color: lane?.status?.color,
                 laneId: lane?.id,
                 title: 'test',
-                task
+                task,
+                onTaskCardClick: handleCardClick
             });
         });
     });
 
     const RenderCard = (props) => {
         // Props of the Lane Card
-        const { task, color } = props;
-        return <TaskCard task={task} color={color}/>
+        const { task, color, onTaskCardClick } = props;
+        return <TaskCard task={task} color={color} onTaskCardClick={onTaskCardClick}/>
     };
 
     const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
@@ -78,8 +86,9 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
     const components = {
         Card: RenderCard
     }
+
     return (
-        <div>
+        <div style={{ height: '100%' }}>
             <Board
                 data={{ lanes }}
                 draggable
