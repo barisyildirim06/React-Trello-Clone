@@ -21,7 +21,6 @@ export default function HomePage() {
 
     const handleTaskCardClick = useCallback((e) => {
         let task = e.target.value;
-        console.log(task)
         setCurrentTask(task);
         setTaskDialogVisible(true);
     }, []);
@@ -30,6 +29,14 @@ export default function HomePage() {
         setTaskDialogVisible(false);
         setCurrentTask(null);
     }, [])
+
+    const handleTaskDelete = useCallback(e => {
+        let task = e.target.value;
+        let filteredTasks = tasks.filter(t => t.id !== task.id);
+        setTaskDialogVisible(false);
+        setCurrentTask(null);
+        setTasks(filteredTasks)
+    }, [tasks])
 
     return (
         <div>
@@ -43,6 +50,7 @@ export default function HomePage() {
                 task={currentTask}
                 visible={taskDialogVisible}
                 onClose={handleTaskDialogClose}
+                onDelete={handleTaskDelete}
             />
         </div>
     )
