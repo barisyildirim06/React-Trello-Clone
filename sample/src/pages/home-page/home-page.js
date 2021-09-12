@@ -90,7 +90,7 @@ export default function HomePage() {
     const handleAddStatusClick = useCallback((e) => {
         const status = {
             text: '',
-            color: 'blue'
+            color: '#5243AA'
         }
         setCurrentStatus(status)
         setStatusEditDialogVisible(true);
