@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Board from "react-trello";
 
 import TaskCard from 'components/task-card';
+
+import { Utils } from 'utils';
 
 export default function BoardView({ statuses, tasks, onTaskSave }) {
     let lanes = statuses.map(status => {
@@ -55,6 +57,24 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
         return <TaskCard task={task} color={color}/>
     };
 
+    const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
+        const lanesByID = Utils.toMap(lanes, "id");
+        let task = tasks.find(el => el.id ===cardId)
+        const lane = lanesByID.has(toLaneId) && lanesByID.get(toLaneId);
+
+        task = {
+            ...task,
+            status: lane.status.text
+        }
+        if (onTaskSave) {
+            onTaskSave({
+                target: {
+                    value: task
+                }
+            })
+        }
+    }, [lanes, onTaskSave, tasks]);
+
     const components = {
         Card: RenderCard
     }
@@ -64,6 +84,7 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
                 data={{ lanes }}
                 draggable
                 editable
+                onCardMoveAcrossLanes={handleCardMoveAcrossLanes}
                 canAddLanes
                 addCardTitle="Add Item"
                 components={components}
