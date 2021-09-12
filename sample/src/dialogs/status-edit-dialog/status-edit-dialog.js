@@ -3,6 +3,7 @@ import React, { useCallback, useState, useEffect } from 'react'
 /* Components */
 import Dialog from 'components/dialog';
 import Button from 'components/button';
+import ColorSelect from 'components/color-select/color-select';
 
 import './status-edit-dialog.scss'
 
@@ -23,9 +24,17 @@ export default function StatusEditDialog({ visible, onClose, onSave, status }) {
     }, [onSave, inputValues, onClose]);
 
     const handleChange = useCallback((e) => {
-        let _inputValues = {
-            ...inputValues,
-            text: e.target.value
+        let _inputValues = {...inputValues}
+        if (e.target.type === 'color') {
+            _inputValues = {
+                ...inputValues,
+                color: e.target.value
+            }
+        } else {
+            _inputValues = {
+                ...inputValues,
+                text: e.target.value
+            }
         }
         setInputValues(_inputValues)
     }, [inputValues]);
@@ -39,6 +48,10 @@ export default function StatusEditDialog({ visible, onClose, onSave, status }) {
             <Dialog.Header>{status?.id ? status.title : 'Create New Status'}</Dialog.Header>
             <Dialog.Body>
                 <div style={{ border: '1px solid #3db6e8'}}>
+                    <div style= {{ padding: '10px'}}>
+                        <label className="label">Status Color</label>
+                        <ColorSelect onChange={handleChange}/>
+                    </div>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
                         <input type='text' className='input' style={{ width: '100%' }} value={inputValues?.title} onChange={handleChange} />
