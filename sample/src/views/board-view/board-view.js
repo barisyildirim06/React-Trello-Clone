@@ -1,6 +1,8 @@
 import React from 'react';
 import Board from "react-trello";
 
+import TaskCard from 'components/task-card';
+
 export default function BoardView({ statuses, tasks, onTaskSave }) {
     let lanes = statuses.map(status => {
 
@@ -47,6 +49,15 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
         });
     });
 
+    const RenderCard = (props) => {
+        // Props of the Lane Card
+        const { task, color } = props;
+        return <TaskCard task={task} color={color}/>
+    };
+
+    const components = {
+        Card: RenderCard
+    }
     return (
         <div>
             <Board
@@ -55,7 +66,7 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
                 editable
                 canAddLanes
                 addCardTitle="Add Item"
-
+                components={components}
             >
             </ Board>
         </div>
