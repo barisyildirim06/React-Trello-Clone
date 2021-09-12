@@ -5,6 +5,7 @@ import BoardView from 'views/board-view';
 /* Dialogs */
 import TaskDialog from 'dialogs/task-dialog';
 import TaskEditDialog from 'dialogs/task-edit-dialog';
+import StatusEditDialog from 'dialogs/status-edit-dialog';
 
 /* Styles */
 import './home-page.scss';
@@ -15,10 +16,12 @@ import { tasksData, statusesData } from 'initial-data';
 
 export default function HomePage() {
     const [ tasks, setTasks ] = useState(tasksData);
-    const [ statuses, ] = useState(statusesData);
+    const [ statuses, setStatuses ] = useState(statusesData);
     const [ taskDialogVisible, setTaskDialogVisible ] = useState(false);
     const [ taskEditDialogVisible, setTaskEditDialogVisible ] = useState(false);
+    const [ statusEditDialogVisible, setStatusEditDialogVisible ] = useState(false);
     const [ currentTask, setCurrentTask ] = useState(null);
+    const [ currentStatus, setCurrentStatus ] = useState(null);
 
     const handleTaskSave = useCallback((e) => {
         let task = e.target.value
@@ -43,6 +46,30 @@ export default function HomePage() {
         setTaskEditDialogVisible(false);
     }, [tasks, currentTask]);
 
+    const handleStatusSave = useCallback((e) => {
+        let status = e.target.value
+        let newStatuses = [...statuses]
+
+        // Find the max id to incremental increase
+        const max = Math.max.apply(null, newStatuses.map(item => Number(item.id)));
+
+        let index = statuses.findIndex(s => s.id === status.id)
+
+        if (index < 0) {
+            newStatuses.push({...status, id: (max + 1).toString()})
+        } else {
+            newStatuses = newStatuses.map(el => {
+                if (el.id === status.id) return status
+                return el;
+            });
+        }
+        if (currentStatus) {
+            setCurrentStatus(status);
+        }
+        setStatuses(newStatuses);
+        setStatusEditDialogVisible(false);
+    }, [statuses, currentStatus]);
+
     const handleTaskCardClick = useCallback((e) => {
         let task = e.target.value;
         setCurrentTask(task);
@@ -60,10 +87,29 @@ export default function HomePage() {
         
     }, [statuses]);
 
+    const handleAddStatusClick = useCallback((e) => {
+        const status = {
+            text: '',
+            color: 'blue'
+        }
+        setCurrentStatus(status)
+        setStatusEditDialogVisible(true);
+    }, []);
+
     const handleTaskDialogClose = useCallback(e => {
         setTaskDialogVisible(false);
         setCurrentTask(null);
-    }, [])
+    }, []);
+
+    const handleTaskEditDialogClose = useCallback(e => {
+        setTaskEditDialogVisible(false);
+        setCurrentTask(null);
+    }, []);
+
+    const handleStatusEditDialogClose = useCallback(e => {
+        setStatusEditDialogVisible(false);
+        setCurrentStatus(null);
+    }, []);
 
     const handleTaskDelete = useCallback(e => {
         let task = e.target.value;
@@ -81,6 +127,7 @@ export default function HomePage() {
                 onTaskSave={handleTaskSave}
                 onTaskCardClick={handleTaskCardClick}
                 onAddTaskClick={handleAddTaskClick}
+                onAddStatusClick={handleAddStatusClick}
             />
             <TaskDialog
                 task={currentTask}
@@ -92,9 +139,15 @@ export default function HomePage() {
             <TaskEditDialog
                 task={currentTask}
                 visible={taskEditDialogVisible}
-                onClose={handleTaskDialogClose}
+                onClose={handleTaskEditDialogClose}
                 onDelete={handleTaskDelete}
                 onSave={handleTaskSave}
+            />
+            <StatusEditDialog
+                status={currentStatus}
+                visible={statusEditDialogVisible}
+                onClose={handleStatusEditDialogClose}
+                onSave={handleStatusSave}
             />
         </div>
     )
