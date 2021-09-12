@@ -119,6 +119,17 @@ export default function HomePage() {
         setTasks(filteredTasks)
     }, [tasks]);
 
+    const handleLaneScroll = useCallback(e => {
+        const { removedIndex, addedIndex } = e.target;
+        let newStatuses = [...statuses];
+        // Used algorithm from the below function
+        // Array.prototype.move = function (from, to) {
+        //     this.splice(to, 0, this.splice(from, 1)[0]);
+        // };
+        newStatuses.splice(addedIndex, 0, newStatuses.splice(removedIndex, 1)[0])
+        setStatuses(newStatuses)
+    }, [statuses]);
+
     return (
         <div>
             <BoardView 
@@ -128,6 +139,7 @@ export default function HomePage() {
                 onTaskCardClick={handleTaskCardClick}
                 onAddTaskClick={handleAddTaskClick}
                 onAddStatusClick={handleAddStatusClick}
+                onLaneScroll={handleLaneScroll}
             />
             <TaskDialog
                 task={currentTask}
