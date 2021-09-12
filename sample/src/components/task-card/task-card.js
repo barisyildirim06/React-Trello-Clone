@@ -1,8 +1,6 @@
 import React from 'react'
 import './task-card.scss';
 
-import { Tooltip } from 'antd';
-
 /* Components */
 import Image from 'components/image';
 // import Spacer from 'components/spacer';
