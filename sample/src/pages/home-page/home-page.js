@@ -6,18 +6,28 @@ import TaskDialog from 'dialogs/task-dialog';
 
 export default function HomePage() {
     const [ tasks, setTasks ] = useState(tasksData);
-    const [ statuses, setStatuses ] = useState(statusesData);
+    const [ statuses, ] = useState(statusesData);
     const [ taskDialogVisible, setTaskDialogVisible ] = useState(false);
     const [ currentTask, setCurrentTask ] = useState(null);
 
     const handleTaskSave = useCallback((e) => {
         let task = e.target.value
-        let newTasks = tasks.map(el => {
-            if (el.id === task.id) return task
-            return el;
-        });
+        console.log(task)
+        let index = tasks.find(t => t.id === task.id)
+        let newTasks = [...tasks]
+        if (index < 0) {
+            newTasks.push(task)
+        } else {
+            newTasks = tasks.map(el => {
+                if (el.id === task.id) return task
+                return el;
+            });
+        }
+        if (currentTask) {
+            setCurrentTask(task);
+        }
         setTasks(newTasks);
-    }, [tasks]);
+    }, [tasks, currentTask]);
 
     const handleTaskCardClick = useCallback((e) => {
         let task = e.target.value;
@@ -36,7 +46,7 @@ export default function HomePage() {
         setTaskDialogVisible(false);
         setCurrentTask(null);
         setTasks(filteredTasks)
-    }, [tasks])
+    }, [tasks]);
 
     return (
         <div>
@@ -51,6 +61,7 @@ export default function HomePage() {
                 visible={taskDialogVisible}
                 onClose={handleTaskDialogClose}
                 onDelete={handleTaskDelete}
+                onSave={handleTaskSave}
             />
         </div>
     )
