@@ -4,7 +4,24 @@ import Board from "react-trello";
 export default function BoardView({ statuses, tasks, onTaskSave }) {
     let lanes = statuses.map(status => {
 
-        const titleStyle= {}
+        const titleStyle = {
+            textAlign: 'center',
+            padding: '5 0 5 20',
+            fontWeight: 'bold',
+            fontSize: '15px',
+            lineHeight: '18px',
+            cursor: '-webkit-grab -moz-grab grab',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        };
+
+        if (status.color) {
+            titleStyle.backgroundColor = status.color;
+            titleStyle.color = "white";
+            titleStyle.border = `2px solid ${status.color}`;
+        }
         return {
             id: status.id.toString(),
             title: status.text,
