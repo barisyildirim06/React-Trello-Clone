@@ -8,9 +8,7 @@ import usePrevious from 'helpers/use-previous';
 /* Styles */
 import './dialog.css';
 
-export default function Dialog({ visible = false, overflow = 'hidden', size = 'medium', children, onOpen, onClose, className, width = 800, height = 540, closeIcon }) {
-
-
+export default function Dialog({ visible = false, overflow = 'unset', size = 'medium', children, onOpen, onClose, className, width = 800, height = 540, closeIcon }) {
     /* Effects */
     const wasVisible = usePrevious(visible);
 
