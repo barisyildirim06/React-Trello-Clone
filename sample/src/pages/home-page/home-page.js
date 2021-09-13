@@ -11,7 +11,7 @@ import StatusEditDialog from 'dialogs/status-edit-dialog';
 import './home-page.scss';
 
 /* Data */
-import { tasksData, statusesData } from 'initial-data';
+import { tasksData, statusesData, tagValues } from 'initial-data';
 
 
 export default function HomePage() {
@@ -147,6 +147,7 @@ export default function HomePage() {
                 onClose={handleTaskDialogClose}
                 onDelete={handleTaskDelete}
                 onSave={handleTaskSave}
+                tagValues={tagValues}
             />
             <TaskEditDialog
                 task={currentTask}
@@ -154,6 +155,7 @@ export default function HomePage() {
                 onClose={handleTaskEditDialogClose}
                 onDelete={handleTaskDelete}
                 onSave={handleTaskSave}
+                tagValues={tagValues}
             />
             <StatusEditDialog
                 status={currentStatus}

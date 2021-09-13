@@ -3,6 +3,7 @@ import './task-card.scss';
 
 /* Components */
 import Image from 'components/image';
+import { Tag } from 'antd';
 // import Spacer from 'components/spacer';
 
 export default function TaskCard({ task, color, onTaskCardClick }) {
@@ -35,6 +36,20 @@ export default function TaskCard({ task, color, onTaskCardClick }) {
             <div className="task-card-details">
                 <div style={{ display: "flex" }}>
                     <div className="task-card-title">{title}</div>
+                </div>
+                <div style={{ display: "flex" }}>
+                    <div className="task-card-title">
+                        {task?.tags.map(el => {
+                            return (
+                                <Tag
+                                    color={el.value}
+                                    style={{ marginRight: 3 }}
+                                >
+                                    {el.label}
+                                </Tag>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>

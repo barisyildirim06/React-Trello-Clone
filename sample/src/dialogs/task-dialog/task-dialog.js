@@ -9,7 +9,7 @@ import TaskEditDialog from 'dialogs/task-edit-dialog';
 
 import './task-dialog.scss'
 
-export default function TaskDialog({ visible, onClose, onDelete, onSave, task }) {
+export default function TaskDialog({ visible, onClose, onDelete, onSave, task, tagValues }) {
     const [taskEditDialogVisible, setTaskEditDialogVisible] = useState(false);
 
     const handleTaskEditDialogClose = useCallback(() => {
@@ -61,6 +61,7 @@ export default function TaskDialog({ visible, onClose, onDelete, onSave, task })
                 onSave={handleTaskEditSave}
                 onClose={handleTaskEditDialogClose}
                 visible={taskEditDialogVisible}
+                tagValues={tagValues}
             />
         </Dialog>
     )
