@@ -162,6 +162,12 @@ export default function HomePage() {
         setStatuses(newStatuses)
     }, [statuses]);
 
+    const handleLaneDelete = useCallback(e => {
+        const laneId = e.target.value;
+        let filteredStatuses = statuses.filter(s => s.id !== laneId);
+        setStatuses(filteredStatuses);
+    }, [statuses]);
+
     return (
         <div style={{ backgroundColor: '#3979bf' }}>
             <div style={{ padding: '20px' }}>
@@ -176,6 +182,7 @@ export default function HomePage() {
                 onAddTaskClick={handleAddTaskClick}
                 onAddStatusClick={handleAddStatusClick}
                 onLaneScroll={handleLaneScroll}
+                onLaneDelete={handleLaneDelete}
             />
             <TaskDialog
                 task={currentTask}

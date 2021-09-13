@@ -8,7 +8,7 @@ import Button from 'components/button/button';
 /* Utilities */
 import { Utils } from 'utils';
 
-export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick, onAddStatusClick, onLaneScroll }) {
+export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick, onAddStatusClick, onLaneScroll, onLaneDelete }) {
     const handleCardClick = useCallback(e => {
         const task = e.target.value;
         if (onTaskCardClick) {
@@ -119,6 +119,16 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
         }
     }, [onLaneScroll]);
 
+    const handleLaneDelete = useCallback(laneId => {
+        if (onLaneDelete) {
+            onLaneDelete({
+                target: {
+                    value: laneId
+                }
+            })
+        }
+    }, [onLaneDelete]);
+
     const components = {
         Card: RenderCard,
         AddCardLink: cardAddButton,
@@ -133,6 +143,7 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
                 editable
                 onCardMoveAcrossLanes={handleCardMoveAcrossLanes}
                 canAddLanes
+                onLaneDelete={handleLaneDelete}
                 handleLaneDragEnd={handleLaneScroll}
                 addCardTitle="Add Item"
                 components={components}
