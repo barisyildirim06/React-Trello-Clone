@@ -4,9 +4,13 @@ import React, { useCallback, useState, useEffect } from 'react'
 import Dialog from 'components/dialog';
 import Button from 'components/button';
 import TagSelect from 'components/tag-select';
+import { Input } from 'antd';
 
-import './task-edit-dialog.scss'
+/* Utilities */
 import { Utils } from 'utils';
+
+/* Styles */
+import './task-edit-dialog.scss';
 
 export default function TaskEditDialog({ visible, onClose, onSave, task, tagValues }) {
     const [inputValues, setInputValues] = useState(task? task : {})
@@ -54,7 +58,7 @@ export default function TaskEditDialog({ visible, onClose, onSave, task, tagValu
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
-                        <input type='text' style={{ width: '100%' }} value={inputValues?.title} onChange={handleChange} />
+                        <Input allowClear={true} style={{ width: '100%' }} placeholder="Enter any Title" value={inputValues?.title} onChange={handleChange}/>
                     </div>
                 </div>
                 <div style={{ border: '1px solid #3db6e8'}}>

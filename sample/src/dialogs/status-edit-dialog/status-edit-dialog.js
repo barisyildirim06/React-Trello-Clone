@@ -4,7 +4,9 @@ import React, { useCallback, useState, useEffect } from 'react'
 import Dialog from 'components/dialog';
 import Button from 'components/button';
 import ColorSelect from 'components/color-select/color-select';
+import { Input } from 'antd';
 
+/* Styles */
 import './status-edit-dialog.scss'
 
 export default function StatusEditDialog({ visible, onClose, onSave, status }) {
@@ -54,7 +56,7 @@ export default function StatusEditDialog({ visible, onClose, onSave, status }) {
                     </div>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
-                        <input type='text' className='input' style={{ width: '100%' }} value={inputValues?.title} onChange={handleChange} />
+                        <Input allowClear={true} style={{ width: '100%' }} placeholder="Enter any Title" value={inputValues?.title} onChange={handleChange}/>
                     </div>
                 </div>
             </Dialog.Body>
