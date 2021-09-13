@@ -66,12 +66,12 @@ export default function StatusEditDialog({ visible, onClose, onSave, status, sta
             <Dialog.Body>
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
-                        <label className="label">Status Color</label>
-                        <ColorSelect onChange={handleChange}/>
-                    </div>
-                    <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
                         <Input allowClear={true} style={{ width: '100%' }} placeholder="Enter any Title" value={inputValues?.title} onChange={handleChange}/>
+                    </div>
+                    <div style= {{ padding: '10px'}}>
+                        <label className="label">Status Color</label>
+                        <ColorSelect onChange={handleChange}/>
                     </div>
                 </div>
             </Dialog.Body>
