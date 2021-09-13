@@ -9,44 +9,67 @@ const statusesData = [
         id: "2",
         text: 'Pass'
     },
+    {
+        color: '#e7ca35',
+        id: "3",
+        text: 'In Progress'
+    },
 ]
 
 const tasksData = [
     {
         id: "1",
         status: 'Not Inspected',
-        title: 'new task 1',
-        tags: [{ value: '#01e164', label: 'Test' }]
+        title: 'Tanzania',
+        tags: [{ value: '#0086ff', label: 'Marketing' }]
     },
     {
         id: "2",
         status: 'Not Inspected',
-        title: 'new task 2',
+        title: 'Slovenia',
         tags: [{ value: '#01e164', label: 'Test' }, { value: '#46d0ff', label: 'Feedback' }]
     },
     {
         id: "3",
         status: 'Not Inspected',
-        title: 'new task 3',
-        tags: [{ value: '#01e164', label: 'Test' }]
+        title: 'Laos',
+        tags: [{ value: '#fd2061', label: 'Bug' }, { value: '#46d0ff', label: 'Feedback' }]
     },
     {
         id: "4",
-        status: 'Pass',
-        title: 'new task 4',
-        tags: [{ value: '#ffd100', label: 'Idea' }]
+        status: 'In Progress',
+        title: 'Singapore',
+        tags: [{ value: '#fd2061', label: 'Bug' }]
     },
     {
         id: "5",
-        status: 'Pass',
-        title: 'new task 5',
-        tags: [{ value: '#01e164', label: 'Test' }, { value: '#6d62e2', label: 'Design' }]
+        status: 'In Progress',
+        title: 'Ecuador',
+        tags: [{ value: '#ffd100', label: 'Idea' }]
     },
     {
         id: "6",
+        status: 'In Progress',
+        title: 'Argentina',
+        tags: [{ value: '#ffd100', label: 'Idea' }, { value: '#fd2061', label: 'Bug' }]
+    },
+    {
+        id: "7",
         status: 'Pass',
-        title: 'new task 6',
-        tags: [{ value: '#01e164', label: 'Test' }]
+        title: 'Hungary',
+        tags: [{ value: '#01e164', label: 'Test' }, { value: '#6d62e2', label: 'Design' }]
+    },
+    {
+        id: "8",
+        status: 'Pass',
+        title: 'Costa Rica',
+        tags: [{ value: '#46d0ff', label: 'Feedback' }]
+    },
+    {
+        id: "9",
+        status: 'Pass',
+        title: 'Australia',
+        tags: [{ value: '#0086ff', label: 'Marketing' }]
     },
 ]
 
