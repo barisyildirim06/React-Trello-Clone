@@ -3,6 +3,7 @@ import React, { useCallback, useState } from 'react'
 /* Components */
 import Dialog from 'components/dialog';
 import Button from 'components/button';
+import { Tag } from 'antd';
 
 /* Dialogs */
 import TaskEditDialog from 'dialogs/task-edit-dialog';
@@ -48,6 +49,21 @@ export default function TaskDialog({ visible, onClose, onDelete, onSave, task, t
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
                         {task?.title}
+                    </div>
+                </div>
+                <div style={{ border: '1px solid #3db6e8'}}>
+                    <div style= {{ padding: '10px'}}>
+                        <label className="label">Tags</label>
+                        {task?.tags.map(el => {
+                            return (
+                                <Tag
+                                    color={el.value}
+                                    style={{ marginRight: 3 }}
+                                >
+                                    {el.label}
+                                </Tag>
+                            )
+                        })}
                     </div>
                 </div>
             </Dialog.Body>
