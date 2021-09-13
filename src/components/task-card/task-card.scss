@@ -1,0 +1,105 @@
+.task-card {
+    align-items: center;
+    display: flex;
+    position: relative;
+    padding: 8px;
+    height: 127px;
+    width: 300px;
+    margin: 8px;
+    background-color: #e9e9e9;
+}
+
+.task-card-icon {
+    border: 4px solid #000000;
+    overflow: hidden;
+    flex: 0 0 96px;
+}
+
+.task-card-details {
+    display: flex;
+    flex: 1 1 0px;
+    flex-direction: column;
+    margin-left: 8px;
+    overflow: hidden;
+    height: 100%;
+    padding: 6px 0px;
+}
+
+.task-card-title {
+    flex: 1 1 0px;
+    font-size: 16px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-card-description,
+.task-card-project {
+    color: gray;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.task-card-milestone,
+.task-card-required-date {
+    color: gray;
+    font-size: 10px;
+    line-height: 22px;
+    text-align: right;
+}
+
+.task-card-assignee {
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    display: inline-block;
+    list-style: none;
+    margin-right: 4px;
+    overflow: hidden;
+    width: 22px;
+    height: 22px;
+}
+
+.task-card i {
+    color: black;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.task-card:hover i {
+    opacity: 0.1;
+}
+
+.task-card i.selected {
+    opacity: 1!important;
+}
+
+.tasks_progress_bar {
+    padding: 6px 0px;
+
+    .tasks_progress_bar_chart {
+        height: 20px;
+        background: gainsboro;
+        border-radius: 16px;
+        overflow: hidden;
+
+        .tasks_progress_bar_closed_task {
+            background: #39d539;
+            height: 100%;
+
+            .tasks_progress_bar_status {
+                display: flex;
+                white-space: nowrap;
+                font-weight: 500;
+                height: 100%;
+                font-size: 10px;
+                font-weight: bold;
+                padding-left: 12px;
+                align-items: center;
+            }
+        }
+    }
+
+}
