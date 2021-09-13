@@ -1,5 +1,3 @@
-// import Color from "color";
-
 export class Utils {
     static toMap(items, key) {
         let result = new Map();

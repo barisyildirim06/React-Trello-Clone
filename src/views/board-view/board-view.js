@@ -1,11 +1,21 @@
 import React, { useCallback } from 'react';
+
+/* Components */
 import Board from "react-trello";
-
 import TaskCard from 'components/task-card';
+import Button from 'components/button/button';
 
+/* Utilities */
 import { Utils } from 'utils';
 
-export default function BoardView({ statuses, tasks, onTaskSave }) {
+export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick, onAddStatusClick, onLaneScroll, onLaneDelete }) {
+    const handleCardClick = useCallback(e => {
+        const task = e.target.value;
+        if (onTaskCardClick) {
+            onTaskCardClick({ target: { value: task } });
+        }
+    }, [onTaskCardClick]);
+
     let lanes = statuses.map(status => {
 
         const titleStyle = {
@@ -29,7 +39,7 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
         return {
             id: status.id.toString(),
             title: status.text,
-            style: { background: 'purple', maxWidth: "100%", flex: "0 0 auto" },
+            style: { backgroundColor: 'rgba(233,233,233,255)', maxWidth: "100%", flex: "0 0 auto" },
             titleStyle,
             cards: [],
             status,
@@ -46,16 +56,39 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
                 color: lane?.status?.color,
                 laneId: lane?.id,
                 title: 'test',
-                task
+                task,
+                onTaskCardClick: handleCardClick
             });
         });
     });
 
     const RenderCard = (props) => {
         // Props of the Lane Card
-        const { task, color } = props;
-        return <TaskCard task={task} color={color}/>
+        const { task, color, onTaskCardClick } = props;
+        return <TaskCard task={task} color={color} onTaskCardClick={onTaskCardClick}/>
     };
+    
+    const cardAddButton = ({ laneId }) => {
+        const handleAddTaskCardClick = () => {
+            if (onAddTaskClick) {
+                onAddTaskClick({
+                    target: {
+                        laneId
+                    }
+                })
+            }
+        }
+        return <Button type='save' onClick={handleAddTaskCardClick}>Add New Card</Button>
+    }
+
+    const laneAddButton = () => {
+        const handleAddStatusClick = () => {
+            if (onAddStatusClick) {
+                onAddStatusClick()
+            }
+        }
+        return <Button type='save' onClick={handleAddStatusClick}>Add New Lane</Button>
+    }
 
     const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
         const lanesByID = Utils.toMap(lanes, "id");
@@ -75,17 +108,43 @@ export default function BoardView({ statuses, tasks, onTaskSave }) {
         }
     }, [lanes, onTaskSave, tasks]);
 
+    const handleLaneScroll = useCallback((removedIndex, addedIndex) => {
+        if (onLaneScroll) {
+            onLaneScroll({
+                target: {
+                    removedIndex,
+                    addedIndex
+                }
+            })
+        }
+    }, [onLaneScroll]);
+
+    const handleLaneDelete = useCallback(laneId => {
+        if (onLaneDelete) {
+            onLaneDelete({
+                target: {
+                    value: laneId
+                }
+            })
+        }
+    }, [onLaneDelete]);
+
     const components = {
-        Card: RenderCard
+        Card: RenderCard,
+        AddCardLink: cardAddButton,
+        NewLaneSection: laneAddButton,
     }
+
     return (
-        <div>
+        <div style={{ height: '100%' }}>
             <Board
                 data={{ lanes }}
                 draggable
                 editable
                 onCardMoveAcrossLanes={handleCardMoveAcrossLanes}
                 canAddLanes
+                onLaneDelete={handleLaneDelete}
+                handleLaneDragEnd={handleLaneScroll}
                 addCardTitle="Add Item"
                 components={components}
             >
