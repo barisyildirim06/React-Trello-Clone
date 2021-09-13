@@ -54,7 +54,7 @@ export default function TaskDialog({ visible, onClose, onDelete, onSave, task, t
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Tags</label>
-                        {task?.tags.map(el => {
+                        {task?.tags?.map(el => {
                             return (
                                 <Tag
                                     color={el.value}
