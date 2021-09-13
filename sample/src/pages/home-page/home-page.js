@@ -194,6 +194,7 @@ export default function HomePage() {
                 tagValues={tagValues}
             />
             <StatusEditDialog
+                statuses={statuses}
                 status={currentStatus}
                 visible={statusEditDialogVisible}
                 onClose={handleStatusEditDialogClose}

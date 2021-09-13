@@ -9,10 +9,25 @@ import { Input } from 'antd';
 /* Styles */
 import './status-edit-dialog.scss'
 
-export default function StatusEditDialog({ visible, onClose, onSave, status }) {
-    const [inputValues, setInputValues] = useState(status? status : {})
+export default function StatusEditDialog({ visible, onClose, onSave, status, statuses }) {
+    const [inputValues, setInputValues] = useState(status? status : {});
+
+    const validate = useCallback(() => {
+        if (inputValues.text === '' || inputValues.text === undefined || !inputValues?.text?.trim()) {
+            alert('Please enter a title');
+            return false;
+        }
+        if (statuses.some(s => s.text.includes(inputValues.text))) {
+            alert("Please write a title that doesn't exist");
+            return false;
+        }
+        return true;
+    }, [inputValues, statuses]);
 
     const handleStatusEditSave = useCallback((e) => {
+        if (!validate()) {
+            return;
+        }
         if (onSave) {
             onSave({
                 target: {
@@ -23,7 +38,7 @@ export default function StatusEditDialog({ visible, onClose, onSave, status }) {
         if (onClose) {
             onClose();
         }
-    }, [onSave, inputValues, onClose]);
+    }, [onSave, inputValues, onClose, validate]);
 
     const handleChange = useCallback((e) => {
         let _inputValues = {...inputValues}

@@ -13,9 +13,20 @@ import { Utils } from 'utils';
 import './task-edit-dialog.scss';
 
 export default function TaskEditDialog({ visible, onClose, onSave, task, tagValues }) {
-    const [inputValues, setInputValues] = useState(task? task : {})
+    const [inputValues, setInputValues] = useState(task? task : {});
+
+    const validate = useCallback(() => {
+        if (inputValues.title === '' || inputValues.title === undefined || !inputValues?.title?.trim()) {
+            alert('Please enter a title');
+            return false;
+        }
+        return true;
+    }, [inputValues]);
 
     const handleTaskEditSave = useCallback((e) => {
+        if (!validate()) {
+            return;
+        }
         if (onSave) {
             onSave({
                 target: {
@@ -26,7 +37,7 @@ export default function TaskEditDialog({ visible, onClose, onSave, task, tagValu
         if (onClose) {
             onClose();
         }
-    }, [onSave, inputValues, onClose]);
+    }, [onSave, inputValues, onClose, validate]);
 
     const handleChange = useCallback((e) => {
         const tagsByValue = Utils.toMap(tagValues, 'value');
