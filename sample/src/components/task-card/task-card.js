@@ -39,11 +39,12 @@ export default function TaskCard({ task, color, onTaskCardClick }) {
                 </div>
                 <div style={{ display: "flex" }}>
                     <div className="task-card-title">
-                        {task?.tags?.map(el => {
+                        {task?.tags?.map((el,index) => {
                             return (
                                 <Tag
                                     color={el.value}
                                     style={{ marginRight: 3 }}
+                                    key={index}
                                 >
                                     {el.label}
                                 </Tag>
