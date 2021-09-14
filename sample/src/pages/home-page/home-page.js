@@ -120,12 +120,12 @@ export default function HomePage() {
         const { laneId } = e.target;
         const task = {
             title: '',
-            status: statuses?.find(s => s.id === laneId)?.text,
+            statusID: laneId,
         }
         setCurrentTask(task)
         setTaskEditDialogVisible(true);
         
-    }, [statuses]);
+    }, []);
 
     const handleAddStatusClick = useCallback((e) => {
         const status = {
@@ -177,6 +177,20 @@ export default function HomePage() {
         setStatuses(filteredStatuses);
     }, [statuses]);
 
+    const handleTitleChange = useCallback(e => {
+        const { laneId, title } = e.target;
+        let _statuses = statuses.map(s => {
+            if (s.id === laneId) {
+                return {
+                    ...s,
+                    text: title
+                }
+            }
+            return s;
+        })
+        setStatuses(_statuses);
+    }, [statuses]);
+
     return (
         <div style={{ backgroundColor: '#3979bf' }}>
             <div style={{ padding: '20px' }}>
@@ -192,6 +206,7 @@ export default function HomePage() {
                 onAddStatusClick={handleAddStatusClick}
                 onLaneScroll={handleLaneScroll}
                 onLaneDelete={handleLaneDelete}
+                onTitleChange={handleTitleChange}
             />
             <TaskDialog
                 task={currentTask}
