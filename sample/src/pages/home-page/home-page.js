@@ -34,7 +34,7 @@ export default function HomePage() {
 
     const filterTasks = useCallback((_searchTerm = searchTerm) => {
         let _filteredTasks = tasks.filter(task => {
-            if (String(task?.id)?.includes(_searchTerm) || task?.title?.toLowerCase()?.includes(_searchTerm.toLowerCase()) || task?.tags?.map(t=> t?.label?.toLowerCase())?.join('')?.includes(_searchTerm.toLowerCase())) {
+            if (String(task?.id)?.includes(_searchTerm) || task?.title?.toLowerCase()?.includes(_searchTerm.toLowerCase()) || task?.comments?.toLowerCase()?.includes(_searchTerm.toLowerCase()) || task?.tags?.map(t=> t?.label?.toLowerCase())?.join('')?.includes(_searchTerm.toLowerCase())) {
                 return true
             }
             return false;
