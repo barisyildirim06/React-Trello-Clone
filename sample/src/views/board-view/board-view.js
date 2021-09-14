@@ -91,22 +91,23 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
     }
 
     const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
-        const lanesByID = Utils.toMap(lanes, "id");
         let task = tasks.find(el => el.id ===cardId)
-        const lane = lanesByID.has(toLaneId) && lanesByID.get(toLaneId);
 
         task = {
             ...task,
-            status: lane.status.text
+            statusID: toLaneId
         }
         if (onTaskSave) {
             onTaskSave({
                 target: {
-                    value: task
+                    value: task,
+                    fromLaneId,
+                    toLaneId,
+                    index
                 }
             })
         }
-    }, [lanes, onTaskSave, tasks]);
+    }, [onTaskSave, tasks]);
 
     const handleLaneScroll = useCallback((removedIndex, addedIndex) => {
         if (onLaneScroll) {

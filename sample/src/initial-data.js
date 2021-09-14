@@ -20,53 +20,62 @@ const tasksData = [
     {
         id: "1",
         status: 'Not Inspected',
+        statusID: '1',
         title: 'Tanzania',
         tags: [{ value: '#0086ff', label: 'Marketing' }]
     },
     {
         id: "2",
         status: 'Not Inspected',
+        statusID: '1',
         title: 'Slovenia',
         tags: [{ value: '#01e164', label: 'Test' }, { value: '#46d0ff', label: 'Feedback' }]
     },
     {
         id: "3",
         status: 'Not Inspected',
+        statusID: '1',
         title: 'Laos',
         tags: [{ value: '#fd2061', label: 'Bug' }, { value: '#46d0ff', label: 'Feedback' }]
     },
     {
         id: "4",
+        statusID: '2',
         status: 'In Progress',
         title: 'Singapore',
         tags: [{ value: '#fd2061', label: 'Bug' }]
     },
     {
         id: "5",
+        statusID: '2',
         status: 'In Progress',
         title: 'Ecuador',
         tags: [{ value: '#ffd100', label: 'Idea' }]
     },
     {
         id: "6",
+        statusID: '2',
         status: 'In Progress',
         title: 'Argentina',
         tags: [{ value: '#ffd100', label: 'Idea' }, { value: '#fd2061', label: 'Bug' }]
     },
     {
         id: "7",
+        statusID: '3',
         status: 'Pass',
         title: 'Hungary',
         tags: [{ value: '#01e164', label: 'Test' }, { value: '#6d62e2', label: 'Design' }]
     },
     {
         id: "8",
+        statusID: '3',
         status: 'Pass',
         title: 'Costa Rica',
         tags: [{ value: '#46d0ff', label: 'Feedback' }]
     },
     {
         id: "9",
+        statusID: '3',
         status: 'Pass',
         title: 'Australia',
         tags: [{ value: '#0086ff', label: 'Marketing' }]
