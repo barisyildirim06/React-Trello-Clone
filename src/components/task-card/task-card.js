@@ -19,9 +19,11 @@ export default function TaskCard({ task, color, onTaskCardClick }) {
 
     let statusColor = "rgb(0,0,0)";
     let title = "";
+    let comments = "";
 
     if (task) {
         title = `${task.title} - ${task.id}`;
+        comments = task.comments
     }
 
     if (color) {
@@ -51,6 +53,9 @@ export default function TaskCard({ task, color, onTaskCardClick }) {
                             )
                         })}
                     </div>
+                </div>
+                <div className="task-card-description">
+                    {comments}
                 </div>
             </div>
         </div>

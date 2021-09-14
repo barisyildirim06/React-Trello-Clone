@@ -5,10 +5,7 @@ import Board from "react-trello";
 import TaskCard from 'components/task-card';
 import Button from 'components/button/button';
 
-/* Utilities */
-import { Utils } from 'utils';
-
-export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick, onAddStatusClick, onLaneScroll, onLaneDelete }) {
+export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick, onAddTaskClick, onAddStatusClick, onLaneScroll, onLaneDelete, onTitleChange }) {
     const handleCardClick = useCallback(e => {
         const task = e.target.value;
         if (onTaskCardClick) {
@@ -33,7 +30,7 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
 
         if (status.color) {
             titleStyle.backgroundColor = status.color;
-            titleStyle.color = "white";
+            titleStyle.color = "black";
             titleStyle.border = `2px solid ${status.color}`;
         }
         return {
@@ -48,7 +45,7 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
 
 
     lanes.forEach(lane => {
-        let laneTasks = tasks.filter(t => (lane?.status?.text === t.status));
+        let laneTasks = tasks.filter(t => (lane?.id === t.statusID));
 
         laneTasks.slice(0, 100).forEach(task => {
             lane.cards.push({
@@ -91,22 +88,23 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
     }
 
     const handleCardMoveAcrossLanes = useCallback((fromLaneId, toLaneId, cardId, index) => {
-        const lanesByID = Utils.toMap(lanes, "id");
         let task = tasks.find(el => el.id ===cardId)
-        const lane = lanesByID.has(toLaneId) && lanesByID.get(toLaneId);
 
         task = {
             ...task,
-            status: lane.status.text
+            statusID: toLaneId
         }
         if (onTaskSave) {
             onTaskSave({
                 target: {
-                    value: task
+                    value: task,
+                    fromLaneId,
+                    toLaneId,
+                    index
                 }
             })
         }
-    }, [lanes, onTaskSave, tasks]);
+    }, [onTaskSave, tasks]);
 
     const handleLaneScroll = useCallback((removedIndex, addedIndex) => {
         if (onLaneScroll) {
@@ -118,6 +116,18 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
             })
         }
     }, [onLaneScroll]);
+
+    const handleLaneChange = useCallback((laneId, data) => {
+        const { title } = data;
+        if (onTitleChange) {
+            onTitleChange({
+                target:{
+                    title,
+                    laneId
+                }
+            })
+        }
+    }, [onTitleChange]);
 
     const handleLaneDelete = useCallback(laneId => {
         if (onLaneDelete) {
@@ -145,8 +155,10 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
                 canAddLanes
                 onLaneDelete={handleLaneDelete}
                 handleLaneDragEnd={handleLaneScroll}
+                editLaneTitle={true}
                 addCardTitle="Add Item"
                 components={components}
+                onLaneUpdate={handleLaneChange}
             >
             </ Board>
         </div>

@@ -55,19 +55,35 @@ export default function HomePage() {
 
     const handleTaskSave = useCallback((e) => {
         let task = e.target.value
+        const { fromLaneId, toLaneId, index } = e.target;
         let newTasks = [...tasks]
 
         // Find the max id to incremental increase
         const max = Math.max.apply(null, newTasks.map(item => Number(item.id)));
-        
-        let index = tasks.findIndex(t => t.id === task.id)
-        if (index < 0) {
+        let ind = tasks.findIndex(t => t.id === task.id)
+
+        if (ind < 0) {
             newTasks.push({...task, id: (max + 1).toString()})
-        } else {
+        } 
+        else if (fromLaneId && toLaneId) {
+            if (fromLaneId === toLaneId) {
+                 return newTasks.splice(index, 0, newTasks.splice((toLaneId*3+ind), 1)[0])
+            }
+            let m = 0;
+            newTasks.forEach(t=> {
+                if (t.statusID < toLaneId && t.id !== task.id) m= m+1;
+            })
             newTasks = tasks.map(el => {
                 if (el.id === task.id) return task
                 return el;
-            });
+            })
+            newTasks.splice(m+index, 0, newTasks.splice(ind, 1)[0]);
+        }
+        else {
+            newTasks = tasks.map(el => {
+                if (el.id === task.id) return task
+                return el;
+            })
         }
         if (currentTask) {
             setCurrentTask(task);
@@ -111,12 +127,12 @@ export default function HomePage() {
         const { laneId } = e.target;
         const task = {
             title: '',
-            status: statuses?.find(s => s.id === laneId)?.text,
+            statusID: laneId,
         }
         setCurrentTask(task)
         setTaskEditDialogVisible(true);
         
-    }, [statuses]);
+    }, []);
 
     const handleAddStatusClick = useCallback((e) => {
         const status = {
@@ -168,6 +184,20 @@ export default function HomePage() {
         setStatuses(filteredStatuses);
     }, [statuses]);
 
+    const handleTitleChange = useCallback(e => {
+        const { laneId, title } = e.target;
+        let _statuses = statuses.map(s => {
+            if (s.id === laneId) {
+                return {
+                    ...s,
+                    text: title
+                }
+            }
+            return s;
+        })
+        setStatuses(_statuses);
+    }, [statuses]);
+
     return (
         <div style={{ backgroundColor: '#3979bf' }}>
             <div style={{ padding: '20px' }}>
@@ -183,6 +213,7 @@ export default function HomePage() {
                 onAddStatusClick={handleAddStatusClick}
                 onLaneScroll={handleLaneScroll}
                 onLaneDelete={handleLaneDelete}
+                onTitleChange={handleTitleChange}
             />
             <TaskDialog
                 task={currentTask}
