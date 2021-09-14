@@ -64,7 +64,8 @@ export default function HomePage() {
 
         if (ind < 0) {
             newTasks.push({...task, id: (max + 1).toString()})
-        } else {
+        } 
+        else if (fromLaneId && toLaneId) {
             if (fromLaneId === toLaneId) {
                  return newTasks.splice(index, 0, newTasks.splice((toLaneId*3+ind), 1)[0])
             }
@@ -77,6 +78,12 @@ export default function HomePage() {
                 return el;
             })
             newTasks.splice(m+index, 0, newTasks.splice(ind, 1)[0]);
+        }
+        else {
+            newTasks = tasks.map(el => {
+                if (el.id === task.id) return task
+                return el;
+            })
         }
         if (currentTask) {
             setCurrentTask(task);
