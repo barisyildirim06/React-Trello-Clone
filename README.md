@@ -1,3 +1,23 @@
+# Install dependencies
+- at the ./sample directory command
+```
+npm install
+```
+# Start project
+- at the ./sample directory command
+```
+npm start
+```
+# See Live
+See Live:
+[https://trello-app-clone.herokuapp.com/](https://trello-app-clone.herokuapp.com/)
+# Contact
+Linkedin Account:
+- [Linkedin](https://www.linkedin.com/in/barisyildirim95/)
+  
+Gmail Account:
+- [Gmail](yildrmbaris@gmail.com)
+
 # CF Frontend Homework
 
 As part of our application process, we'd like to see what you can produce by giving you a small assignment. It should take you no more than a week to complete the assignment, but any extra polish or features you might want to put in will not go unnoticed.
