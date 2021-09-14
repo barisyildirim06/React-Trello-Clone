@@ -44,11 +44,17 @@ export default function TaskDialog({ visible, onClose, onDelete, onSave, task, t
     return (
         <Dialog visible={visible} onClose={onClose} width={400} style={{ backgroundColor: 'white' }}>
             <Dialog.Header>{task?.title}</Dialog.Header>
-            <Dialog.Body>
+            <Dialog.Body style={{ maxHeight:'250px', overflowY: 'scroll' }}>
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
                         {task?.title}
+                    </div>
+                </div>
+                <div style={{ border: '1px solid #3db6e8'}}>
+                    <div style= {{ padding: '10px'}}>
+                        <label className="label">Comments</label>
+                        {task?.comments}
                     </div>
                 </div>
                 <div style={{ border: '1px solid #3db6e8'}}>

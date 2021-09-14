@@ -13,6 +13,7 @@ import { Utils } from 'utils';
 import './task-edit-dialog.scss';
 
 export default function TaskEditDialog({ visible, onClose, onSave, task, tagValues }) {
+    const { TextArea } = Input;
     const [inputValues, setInputValues] = useState(task? task : {});
 
     const validate = useCallback(() => {
@@ -49,10 +50,16 @@ export default function TaskEditDialog({ visible, onClose, onSave, task, tagValu
                 ..._inputValues,
                 tags: tagsArray
             }
-        } else {
+        } else if (e.target.localName === 'input'){
             _inputValues = {
                 ..._inputValues,
                 title: e.target.value
+            }
+        }
+        else if (e.target.localName === 'textarea'){
+            _inputValues = {
+                ..._inputValues,
+                comments: e.target.value
             }
         }
         setInputValues(_inputValues)
@@ -65,11 +72,17 @@ export default function TaskEditDialog({ visible, onClose, onSave, task, tagValu
     return (
         <Dialog visible={visible} onClose={onClose} width={400} style={{ backgroundColor: 'white' }}>
             <Dialog.Header>{task?.id ? task.title : 'Create New Task'}</Dialog.Header>
-            <Dialog.Body>
+            <Dialog.Body style= {{ maxHeight:'300px', overflowY: 'scroll' }}>
                 <div style={{ border: '1px solid #3db6e8'}}>
                     <div style= {{ padding: '10px'}}>
                         <label className="label">Title</label>
-                        <Input allowClear={true} style={{ width: '100%' }} placeholder="Enter any Title" value={inputValues?.title} onChange={handleChange}/>
+                        <Input style={{ width: '100%' }} placeholder="Enter any Title" value={inputValues?.title} onChange={handleChange}/>
+                    </div>
+                </div>
+                <div style={{ border: '1px solid #3db6e8'}}>
+                    <div style= {{ padding: '10px'}}>
+                        <label className="label">Comments</label>
+                        <TextArea rows={2} style={{ width: '100%' }} placeholder="Write any Comments" value={inputValues?.comments} onChange={handleChange}/>
                     </div>
                 </div>
                 <div style={{ border: '1px solid #3db6e8'}}>
