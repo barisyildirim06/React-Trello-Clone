@@ -199,7 +199,7 @@ export default function HomePage() {
     }, [statuses]);
 
     return (
-        <div style={{ backgroundColor: '#3979bf' }}>
+        <div>
             <div style={{ padding: '20px' }}>
                 <Input allowClear={true} placeholder="Quick Search" value={searchTerm} onChange={handleSearchTermChange}/>
             </div>

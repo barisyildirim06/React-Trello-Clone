@@ -36,7 +36,7 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
         return {
             id: status.id.toString(),
             title: status.text,
-            style: { backgroundColor: 'rgba(233,233,233,255)', maxWidth: "100%", flex: "0 0 auto" },
+            style: { maxWidth: "90vh", flex: "0 0 auto", maxHeight: '90vh', overflow: 'hidden' },
             titleStyle,
             cards: [],
             status,
@@ -146,8 +146,9 @@ export default function BoardView({ statuses, tasks, onTaskSave, onTaskCardClick
     }
 
     return (
-        <div style={{ height: '100%' }}>
+        <div>
             <Board
+                style={{backgroundColor: 'transparent', height: '80%'}} 
                 data={{ lanes }}
                 draggable
                 editable
