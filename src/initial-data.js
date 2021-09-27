@@ -5,14 +5,14 @@ const statusesData = [
         text: 'Not Inspected'
     },
     {
-        color: 'GREEN',
+        color: '#e7ca35',
         id: "2",
-        text: 'Pass'
+        text: 'In Progress'
     },
     {
-        color: '#e7ca35',
+        color: 'GREEN',
         id: "3",
-        text: 'In Progress'
+        text: 'Pass'
     },
 ]
 
@@ -22,7 +22,7 @@ const tasksData = [
         status: 'Not Inspected',
         statusID: '1',
         title: 'Tanzania',
-        comments: 'country in East Africa within the African Great Lakes region',
+        comments: 'country in East Africa',
         tags: [ { value: '#9e0e15', label: 'Trivial' }, { value: '#b5c497', label: 'Test' }, { value: '#ffd100', label: 'Console' }]
     },
     {
@@ -46,7 +46,7 @@ const tasksData = [
         statusID: '2',
         status: 'In Progress',
         title: 'Singapore',
-        comments: 'The English name of "Singapore" is an anglicisation of the native Malay name for the country, Singapura, which was in turn derived from the Sanskrit word',
+        comments: 'The English name of "Singapore"',
         tags: [{ value: '#9e0e15', label: 'Trivial' }]
     },
     {
@@ -54,7 +54,7 @@ const tasksData = [
         statusID: '2',
         status: 'In Progress',
         title: 'Ecuador',
-        comments: `he country's name means "Equator" in Spanish, truncated from the Spanish official name, República del Ecuador`,
+        comments: `he country's name means "Equator" in Spanish`,
         tags: [{ value: '#ffd100', label: 'Console' }]
     },
     {
@@ -62,7 +62,7 @@ const tasksData = [
         statusID: '2',
         status: 'In Progress',
         title: 'Argentina',
-        comments: 'Argentina covers an area of 2,780,400 km2 (1,073,500 sq mi), making it the largest Spanish-speaking nation in the world',
+        comments: 'Argentina covers an area of 2,780,400 km2',
         tags: [{ value: '#ffd100', label: 'Console' }, { value: '#9e0e15', label: 'Trivial' }]
     },
     {
@@ -70,7 +70,7 @@ const tasksData = [
         statusID: '3',
         status: 'Pass',
         title: 'Hungary',
-        comments: 'Hungary is a landlocked country. Hungary has a population of 10 million, mostly ethnic Hungarians and a significant Romani minority',
+        comments: 'Hungary is a landlocked country.',
         tags: [{ value: '#01e164', label: 'Test' }, { value: '#6d62e2', label: 'Minor' }]
     },
     {
@@ -78,7 +78,7 @@ const tasksData = [
         statusID: '3',
         status: 'Pass',
         title: 'Costa Rica',
-        comments: 'Costa Rica borders the Caribbean Sea to the east, and the Pacific Ocean to the west',
+        comments: 'Costa Rica borders the Caribbean Sea',
         tags: [{ value: '#46d0ff', label: 'App' }]
     },
     {
@@ -86,7 +86,7 @@ const tasksData = [
         statusID: '3',
         status: 'Pass',
         title: 'Australia',
-        comments: 'Australia, officially the Commonwealth of Australia, is a sovereign country comprising the mainland of the Australian continent',
+        comments: 'Australia, officially the Commonwealth ',
         tags: [{ value: '#0086ff', label: 'Marketing' }]
     },
 ]
